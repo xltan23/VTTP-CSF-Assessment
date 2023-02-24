@@ -49,7 +49,7 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-	// db.restaurants.find({cuisine:"{restaurant.cuisine}"},{_id:0,name:1}).sort({name:-1})
+	// db.restaurants.find({cuisine:"restaurant.cuisine"},{_id:0,name:1}).sort({name:-1})
 	public List<String> getRestaurantsByCuisine(String cuisine) {
 		// Implmementation in here
 		List<String> restaurants = new LinkedList<>();
@@ -76,7 +76,7 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) 
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
-	// db.restaurants.find({name:"{restaurant.name}"},{_id:0,restaurant_id:1,name:1,cuisine:1,address:1,borough:1})
+	// db.restaurants.find({name:"restaurant.name"},{_id:0,restaurant_id:1,name:1,cuisine:1,address:1,borough:1})
 	public Optional<Restaurant> getRestaurant(String restaurant) {
 		// Implmementation in here
 		List<Restaurant> restaurants = new LinkedList<>();
@@ -98,7 +98,7 @@ public class RestaurantRepository {
 	// Use this method to insert a comment into the restaurant database
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
-	// db.comments.insertOne({name:"{comment.name}",rating:{comment.rating},text:"comment.text"}) 
+	// db.comments.insertOne({name:"comment.name",rating:comment.rating,text:"comment.text"}) 
 	public void addComment(Comment comment) {
 		// Implmementation in here
 		Document newDoc = mongoTemplate.insert(commentToDoc(comment),"comments");

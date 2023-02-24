@@ -20,3 +20,6 @@ import { RestaurantDetailsComponent } from './components/restaurant-details.comp
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+// Having problems with npm imports. Created another identical base client template pn separate GitHub Repo 

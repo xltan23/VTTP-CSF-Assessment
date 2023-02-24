@@ -34,6 +34,5 @@ export class RestaurantService {
 	// DO NOT CHANGE THE METHOD'S NAME OR SIGNATURE
 	public postComment(comment: Comment): Promise<any> {
 		// Implememntation in here
-
 	}
 }

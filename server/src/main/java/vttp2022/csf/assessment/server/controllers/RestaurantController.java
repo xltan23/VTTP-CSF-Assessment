@@ -19,21 +19,17 @@ import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import vttp2022.csf.assessment.server.models.Comment;
-import vttp2022.csf.assessment.server.models.Restaurant;
-import vttp2022.csf.assessment.server.repositories.RestaurantRepository;
 import vttp2022.csf.assessment.server.services.RestaurantService;
 
 import static vttp2022.csf.assessment.server.Utils.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantSvc;
-
-    @Autowired
-    private RestaurantRepository restaurantRepo;
     
     // GET/api/cuisines (Angular to make the Http Call to retrieve)
     @GetMapping(path = "/cuisines")
@@ -56,6 +52,8 @@ public class RestaurantController {
         }
         return ResponseEntity.ok(jab.build().toString());
     }
+
+    // Need a GET Mapping to retrieve Map from S3 and pass to Angular
 
     // POST/api/comments 
     @PostMapping(path = "/comments", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

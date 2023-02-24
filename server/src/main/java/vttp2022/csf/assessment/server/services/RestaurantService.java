@@ -1,5 +1,6 @@
 package vttp2022.csf.assessment.server.services;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +44,15 @@ public class RestaurantService {
 	// Use this method to find a specific restaurant
 	// You can add any parameters (if any) 
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	public Optional<Restaurant> getRestaurant(String restaurant) {
+	public Optional<Restaurant> getRestaurant(String restaurant) throws IOException {
 		// Implmementation in here
+		Optional<Restaurant> optRes = restaurantRepo.getRestaurant(restaurant);
+		if (optRes.isEmpty()) {
+			
+		} else {
+			mapCache.getMap(optRes.get());
+		}
+		
 		return restaurantRepo.getRestaurant(restaurant);
 	}
 
