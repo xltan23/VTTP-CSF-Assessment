@@ -1,0 +1,2 @@
+TODO: Task 1 - Write the mongo import command here
+[Local instance] mongoimport -hlocalhost --port=27017 -drestaurantsdb -crestaurants --jsonArray restaurants.json
