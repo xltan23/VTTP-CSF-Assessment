@@ -1,17 +1,27 @@
 package vttp2022.csf.assessment.server.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
+import vttp2022.csf.assessment.server.models.Restaurant;
 import vttp2022.csf.assessment.server.services.RestaurantService;
 
 import static vttp2022.csf.assessment.server.Utils.*;
@@ -43,5 +53,12 @@ public class RestaurantController {
             jab.add(stringToJSONR(restaurant));
         }
         return ResponseEntity.ok(jab.build().toString());
+    }
+
+    @PostMapping(path = "/comments", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> postComments(@RequestBody MultiValueMap<String,String> form) {
+        
+        return null;
     }
 }

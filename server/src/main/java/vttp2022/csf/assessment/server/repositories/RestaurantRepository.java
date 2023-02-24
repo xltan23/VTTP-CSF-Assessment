@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import jakarta.json.JsonObject;
 import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 
@@ -48,13 +48,13 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-	// db.restaurants.find({cuisine:"Chinese"},{_id:0,name:1})
+	// db.restaurants.find({cuisine:"Chinese"},{_id:0,name:1}).sort({name:-1})
 	public List<String> getRestaurantsByCuisine(String cuisine) {
 		// Implmementation in here
 		List<String> restaurants = new LinkedList<>();
 		List<String> restaurantsUS = new LinkedList<>();
 		Criteria criteria = Criteria.where("cuisine").is(cuisine);
-		Query query = Query.query(criteria);
+		Query query = Query.query(criteria).with(Sort.by(Sort.Direction.ASC,"name"));
 		query.fields().exclude("_id").include("name");
 		List<Document> restaurantsDoc = mongoTemplate.find(query, Document.class, "restaurants");
 		for (Document restaurantDoc:restaurantsDoc) {
@@ -75,10 +75,22 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) 
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
-	//  
-	public Optional<Restaurant> getRestaurant() {
+	// db.restaurants.find({name:"Ajisen Ramen"},{_id:0,restaurant_id:1,name:1,cuisine:1,address:1,borough:1})
+	public Optional<Restaurant> getRestaurant(String restaurant) {
 		// Implmementation in here
-		return null;
+		List<Restaurant> restaurants = new LinkedList<>();
+		Criteria criteria = Criteria.where("name").is(restaurant);
+		Query query = Query.query(criteria);
+		query.fields().exclude("_id").include("restaurant_id","name","cuisine","address","borough");
+		List<Document> restaurantsDoc = mongoTemplate.find(query, Document.class, "restaurants");
+		for (Document restaurantDoc:restaurantsDoc) {
+			Restaurant r = docToObject(restaurantDoc);
+			restaurants.add(r);
+		}
+		if (null == restaurants) {
+			return Optional.empty();
+		}
+		return Optional.of(restaurants.get(0));
 	}
 
 	// TODO Task 5

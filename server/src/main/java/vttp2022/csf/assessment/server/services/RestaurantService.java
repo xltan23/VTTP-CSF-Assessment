@@ -44,9 +44,9 @@ public class RestaurantService {
 	// Use this method to find a specific restaurant
 	// You can add any parameters (if any) 
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	public Optional<Restaurant> getRestaurant() {
+	public Optional<Restaurant> getRestaurant(String restaurant) {
 		// Implmementation in here
-		return null;
+		return restaurantRepo.getRestaurant(restaurant);
 	}
 
 	// TODO Task 5
