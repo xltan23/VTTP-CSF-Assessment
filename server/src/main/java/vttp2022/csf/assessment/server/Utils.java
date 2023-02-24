@@ -70,4 +70,13 @@ public class Utils {
         comment.setText(form.getFirst("text"));
         return comment;
     }
+
+    public static Document commentToDoc(Comment comment) {
+        Document document = new Document();
+        document.put("name", comment.getName());
+        document.put("rating", comment.getRating());
+        document.put("text", comment.getText());
+        document.put("restaurant_id", comment.getRestaurantId());
+        return document;
+    }
 }

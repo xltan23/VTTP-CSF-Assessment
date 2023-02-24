@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.json.JsonObject;
 import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 import vttp2022.csf.assessment.server.repositories.MapCache;
@@ -54,7 +53,7 @@ public class RestaurantService {
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	public void addComment(Comment comment) {
 		// Implmementation in here
-		
+		restaurantRepo.addComment(comment);
 	}
 	//
 	// You may add other methods to this class
